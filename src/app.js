@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./config/dbConnect.js";
 import livros from "./models/livro.js";
+import routes from "./routes/index.js";
 
 db.on("error", console.log.bind(console, "erro de conexão"));
 db.once("open", () => {
@@ -9,22 +10,13 @@ db.once("open", () => {
 
 const app = express();
 app.use(express.json());
+routes(app)
 
 //const livros = [
 //  {id: 1, "titulo": "harrypoter"},
 //  {id: 2, "titulo": "senhor dos aneis"}
 //]
 
-app.get('/', (req, res) => {
-    res.status(200).send('livraria node');
-})
-
-app.get('/livros', (req, res) => {
-    livros.find((err, livros) =>{
-        res.status(200).json(livros);
-    })
-    
-})
 
 app.get('/livros/:id', (req, res) => {
     //utiliza o id vindo pela url para passa-lo a funçao
