@@ -5,8 +5,10 @@ class livroController {
     // responsavel por definir as regas de nogocio, recebe os endPoints direto do arquivo livrosRoutes
     static listarLivros = (req, res) => {
         //lista todos os livros já cadastrados no banco de dados
-        livros.find((err, livros) =>{
-            res.status(200).json(livros);
+        livros.find()
+            .populate('autor')
+            .exec((err, livros) =>{
+                res.status(200).json(livros);
         });    
     }
 
