@@ -68,6 +68,18 @@ class livroController {
             }
         })
     }
+
+    static buscarLivroPorEditora =(req, res) =>{
+        const editora = req.query.editora
+
+        livros.find({'editora': editora}, {}, (err, livros)=>{
+            if(err){
+                res.status(500).send({message: `erro ao encontar editora`}) 
+            }else{
+                res.status(200).send(livros);
+            }
+        })
+    }
 }
 
 export default livroController
