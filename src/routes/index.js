@@ -1,6 +1,5 @@
 import express from "express";
 import livros from './livrosRoutes.js';
-import autores from './autoresRoutes.js';
 
 const routes = (app) => {
     // define a mensagem da pagina principal ou endPoint prinipal
@@ -10,8 +9,7 @@ const routes = (app) => {
     // faz a conexão entre meu arquivo app.js e as minhas rotas já definidas
     app.use(
         express.json(),
-        livros,
-        autores
+        livros
     )
 }
 

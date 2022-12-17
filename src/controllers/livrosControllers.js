@@ -5,11 +5,14 @@ class livroController {
     // responsavel por definir as regas de nogocio, recebe os endPoints direto do arquivo livrosRoutes
     static listarLivros = (req, res) => {
         //lista todos os livros já cadastrados no banco de dados
-        livros.find()
-            .populate('autor')
-            .exec((err, livros) =>{
+        livros.find((err, livros) => {
+            if(!err){
                 res.status(200).json(livros);
-        });    
+            }else{
+                res.status(500).send({message: `${err.message} - não foi possivel acessar a lista de livros`})
+            }
+        })
+       
     }
 
     static listarLivroPorId = (req, res) => {
@@ -69,10 +72,22 @@ class livroController {
         })
     }
 
-    static buscarLivroPorEditora =(req, res) =>{
-        const editora = req.query.editora
+   /* static buscarLivroPorEditora = (req, res) =>{
+       // const editora = req.query.editora
 
         livros.find({'editora': editora}, {}, (err, livros)=>{
+            if(err){
+                res.status(500).send({message: `erro ao encontar editora`}) 
+            }else{
+                res.status(200).send(livros);
+            }
+        })
+    } */
+
+    static buscarLivroPorTitulo = (req, res) =>{
+        const titulo = req.query.titulo
+
+        livros.find({'titulo': titulo}, {}, (err, livros)=>{
             if(err){
                 res.status(500).send({message: `erro ao encontar editora`}) 
             }else{

@@ -13,7 +13,7 @@ db.once("open", () => {
 const app = express();
 //converte os arquivos para formato JSON
 app.use(express.json());
-
+// responsavel por conceder acesso de outras urls a API
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     app.use(cors());
