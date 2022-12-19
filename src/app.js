@@ -13,13 +13,15 @@ db.once("open", () => {
 //estabelece o uso d efetivo do express
 const app = express();
 
+app.use(cors());
+
 // responsavel por conceder acesso de outras urls a API
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST');
     app.use(cors());
     next();
-})
+})*/
 
 //converte os arquivos para formato JSON
 app.use(express.json());
